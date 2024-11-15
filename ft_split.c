@@ -6,13 +6,13 @@
 /*   By: maitoumg <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 17:04:44 by maitoumg          #+#    #+#             */
-/*   Updated: 2024/11/14 22:09:39 by m3d417           ###   ########.fr       */
+/*   Updated: 2024/11/15 13:36:50 by maitoumg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-/*static int ft_count(const char *s, char c)
+static int ft_count(const char *s, char c)
 {
         int count;
 
@@ -30,16 +30,23 @@
 	return count;
 }
 
-static char *ft_allocate(, int n)
+static char *ft_allocate(const char *s, char c, int n)
 {
 	char *ptr;
 
 	ptr = malloc(n + 1);
 	if(!ptr)
 		return NULL;
-	while()
+	while(*ptr && *s != c)
 	{
-		
+		while(*ptr == c)
+			ptr++;
+		while(*ptr && *s && *s != c)
+		{
+			*ptr = *s;
+			ptr++;
+			s++;
+		}
 	}
 }
 
@@ -47,4 +54,4 @@ static char *ft_allocate(, int n)
 char	**ft_split(const char *s, char c)
 {
 	
-}*/
+}
