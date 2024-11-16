@@ -6,7 +6,7 @@
 /*   By: maitoumg <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 00:04:32 by maitoumg          #+#    #+#             */
-/*   Updated: 2024/11/13 01:09:58 by maitoumg         ###   ########.fr       */
+/*   Updated: 2024/11/16 09:37:25 by m3d417           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,10 @@
 
 void	ft_lstdelone(t_list *lst, void (*del)(void *))
 {
-	if (lst && del)
-	{
-		if (lst->content)
-			del(lst->content);
-		free(lst);
-	}
+	if (!lst || !del)
+		return ;
+	del(lst->content);
+	free(lst);
 }
 
 /*int main()

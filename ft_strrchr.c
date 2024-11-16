@@ -6,7 +6,7 @@
 /*   By: maitoumg <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 22:43:12 by maitoumg          #+#    #+#             */
-/*   Updated: 2024/11/13 02:02:08 by m3d417           ###   ########.fr       */
+/*   Updated: 2024/11/16 09:45:59 by maitoumg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,20 +14,14 @@
 
 char	*ft_strrchr(const char *s, int c)
 {
-	const char	*ptr;
+	int	i;
 
-	if (s == NULL)
-		return (NULL);
-	ptr = s;
-	while (*ptr)
-		ptr++;
-	if (c == '\0')
-		return ((char *)ptr);
-	while (ptr >= s)
+	i = ft_strlen(s);
+	while (i >= 0)
 	{
-		if (*ptr == (char)c)
-			return ((char *)ptr);
-		ptr--;
+		if (s[i] == (char)c)
+			return ((char *)(s + i));
+		i--;
 	}
-	return (NULL);
+	return (0);
 }
