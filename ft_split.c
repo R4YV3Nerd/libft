@@ -6,31 +6,29 @@
 /*   By: maitoumg <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 14:00:03 by maitoumg          #+#    #+#             */
-/*   Updated: 2024/11/16 14:03:49 by m3d417           ###   ########.fr       */
+/*   Updated: 2024/11/16 14:03:49 by maitoumg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int	count_words(const char *str, char c)
+static int    count_words(const char *str, char c)
 {
-	int	i;
-	int	trigger;
-
-	i = 0;
-	trigger = 0;
-	while (*str)
-	{
-		if (*str != c && trigger == 0)
-		{
-			trigger = 1;
-			i++;
-		}
-		else if (*str == c)
-			trigger = 0;
-		str++;
-	}
-	return (i);
+    int    count;
+    
+    count = 0;
+    while (*str)
+    {
+        while(*str == c)
+          str++;
+        if(*str)
+        {
+          count++;
+          while(*str != c && *str)
+              str++;
+        }
+    }
+    return (count);
 }
 
 static char	*word_dup(const char *str, int start, int finish)
@@ -50,23 +48,23 @@ char	**ft_split(char const *s, char c)
 {
 	size_t	i;
 	size_t	j;
-	int		index;
+	int		progress;
 	char	**split;
 
 	split = malloc((count_words(s, c) + 1) * sizeof(char *));
 	if (!s || !split)
-		return (0);
+		return NULL;
 	i = 0;
 	j = 0;
-	index = -1;
+	progress = -1;
 	while (i <= ft_strlen(s))
 	{
-		if (s[i] != c && index < 0)
-			index = i;
-		else if ((s[i] == c || i == ft_strlen(s)) && index >= 0)
+		if (s[i] != c && progress < 0)
+			progress = i;
+		else if ((s[i] == c || i == ft_strlen(s)) && progress >= 0)
 		{
-			split[j++] = word_dup(s, index, i);
-			index = -1;
+			split[j++] = word_dup(s, progress, i);
+			progress = -1;
 		}
 		i++;
 	}
