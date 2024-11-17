@@ -19,8 +19,6 @@ char	*ft_strjoin(const char *s1, const char *s2)
 	size_t	sizebuffer;
 	char	*str;
 
-	if (!s1 && !s2)
-		return (NULL);
 	if (!s1)
 		return (ft_strdup(s2));
 	if (!s2)

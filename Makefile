@@ -13,7 +13,7 @@ NAME		= libft.a
 CC			= gcc -Wall -Wextra -Werror
 
 %.o: %.c libft.h
-			${CC} -I. -c $< -o ${<:.c=.o}
+			${CC} -c $< -o $@
 
 all:		${NAME}
 
