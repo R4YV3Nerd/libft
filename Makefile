@@ -7,28 +7,27 @@ SRCS		= ft_strlen.c ft_strlcpy.c ft_isalpha.c ft_isdigit.c ft_isalnum.c \
 SRCS_BONUS	= ft_lstnew_bonus.c ft_lstadd_front_bonus.c ft_lstsize_bonus.c ft_lstlast_bonus.c \
        ft_lstadd_back_bonus.c ft_lstdelone_bonus.c ft_lstclear_bonus.c ft_lstiter_bonus.c \
        ft_lstmap_bonus.c
-OBJS		= ${SRCS:.c=.o}
-OBJS_BONUS	= ${SRCS_BONUS:.c=.o}
+OBJS		= $(SRCS:.c=.o)
+OBJS_BONUS	= $(SRCS_BONUS:.c=.o)
 NAME		= libft.a
-CC			= gcc -Wall -Wextra -Werror
+CC			= cc
+CFLAGS            = -Wall -Wextra -Werror
 
-%.o: %.c libft.h
-			${CC} -c $< -o $@
+all:		$(NAME)
 
-all:		${NAME}
+$(NAME):	$(OBJS)
+			ar rcs $(NAME) $(OBJS)
 
-$(NAME):	${OBJS} libft.h
-			ar rcs ${NAME} ${OBJS}
-
-bonus:		${OBJS_BONUS} libft.h
-			ar rcs ${NAME} ${OBJS_BONUS}
+bonus:		$(OBJS_BONUS) 
+			ar rcs $(NAME) $(OBJS_BONUS)
 
 clean:
-			rm -f ${OBJS} ${OBJS_BONUS}
+			rm -f $(OBJS) $(OBJS_BONUS)
 
 fclean:		clean
-			rm -f ${NAME}
+			rm -f $(NAME)
 
 re:			fclean all
 
-.PHONY:		all clean fclean re bonus
+.PHONY:		clean
+#.SECONDARY:	$(OBJS) $(OBJS_BONUS)

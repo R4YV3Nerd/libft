@@ -19,6 +19,8 @@ size_t	ft_strlcat(char *dst, const char *src, size_t dstsize)
 	size_t	k;
 	size_t	i;
 
+	if (!dst && dstsize == 0)
+		return (ft_strlen(src));
 	ld = 0;
 	while (dst[ld] != '\0')
 		ld++;
