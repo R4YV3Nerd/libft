@@ -5,23 +5,12 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: maitoumg <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/20 22:29:59 by maitoumg          #+#    #+#             */
-/*   Updated: 2024/11/20 23:22:02 by maitoumg         ###   ########.fr       */
+/*   Created: 2024/11/21 00:29:00 by maitoumg          #+#    #+#             */
+/*   Updated: 2024/11/21 00:29:02 by maitoumg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-
-static char	**free_array(char **ptr, int i)
-{
-	while (i > 0)
-	{
-		i--;
-		free(ptr[i]);
-	}
-	free(ptr);
-	return (0);
-}
 
 static int	ft_count_words(char const *str, char c)
 {
@@ -42,73 +31,46 @@ static int	ft_count_words(char const *str, char c)
 	return (count);
 }
 
-static char	*ft_putword(char *word, char const *s, int i, int word_len)
+static char	**freeing(char **m, int i)
 {
-	int	j;
-
-	j = 0;
-	while (word_len > 0)
-	{
-		word[j] = s[i - word_len];
-		j++;
-		word_len--;
-	}
-	word[j] = '\0';
-	return (word);
+	while (i-- > 0)
+		free(m[i]);
+	free(m);
+	return (NULL);
 }
 
-static char	**ft_split_words(char const *s, char c, char **s2, int num_words)
+static char const	*skip(char const *s, char c)
 {
-	int	i;
-	int	word;
-	int	word_len;
-
-	i = 0;
-	word = 0;
-	word_len = 0;
-	while (word < num_words)
-	{
-		while (s[i] && s[i] == c)
-			i++;
-		while (s[i] && s[i] != c)
-		{
-			i++;
-			word_len++;
-		}
-		s2[word] = (char *)malloc(sizeof(char) * (word_len + 1));
-		if (!s2[word])
-			return (free_array(s2, word));
-		ft_putword(s2[word], s, i, word_len);
-		word_len = 0;
-		word++;
-	}
-	s2[word] = 0;
-	return (s2);
+	while (*s == c)
+		s++;
+	return (s);
 }
 
 char	**ft_split(char const *s, char c)
 {
-	char			**s2;
-	unsigned int	num_words;
+	int		i;
+	int		len;
+	char	**m;
 
+	i = 0;
 	if (!s)
-		return (0);
-	num_words = ft_count_words(s, c);
-	s2 = (char **)malloc(sizeof(char *) * (num_words + 1));
-	if (!s2)
-		return (0);
-	s2 = ft_split_words(s, c, s2, num_words);
-	return (s2);
+		return (NULL);
+	m = malloc(sizeof(char *) * (ft_count_words(s, c) + 1));
+	if (!m)
+		return (NULL);
+	while (*s)
+	{
+		len = 0;
+		s = skip(s, c);
+		if (*s == '\0')
+			break ;
+		while (s[len] != c && s[len])
+			len++;
+		m[i] = ft_substr(s, 0, len);
+		if (m[i++] == NULL)
+			return (freeing (m, i));
+		s += len;
+	}
+	m[i] = NULL;
+	return (m);
 }
-
-// int main()
-// {
-//   int i = 0;
-//   char str[] = "  1337 42 coding school  ";
-//   char **s = ft_split(str, ' ');
-//   while(i < 4)
-//   {
-//     printf("%s\n", s[i]);
-//     i++;
-//   }
-// }
