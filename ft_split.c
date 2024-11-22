@@ -49,7 +49,7 @@ static char const	*skip(char const *s, char c)
 char	**ft_split(char const *s, char c)
 {
 	int		i;
-	int		len;
+	int		flag;
 	char	**m;
 
 	i = 0;
@@ -60,16 +60,16 @@ char	**ft_split(char const *s, char c)
 		return (NULL);
 	while (*s)
 	{
-		len = 0;
+		flag = 0;
 		s = skip(s, c);
 		if (*s == '\0')
 			break ;
-		while (s[len] != c && s[len])
-			len++;
-		m[i] = ft_substr(s, 0, len);
+		while (s[flag] != c && s[flag])
+			flag++;
+		m[i] = ft_substr(s, 0, flag);
 		if (m[i++] == NULL)
 			return (freeing (m, i));
-		s += len;
+		s += flag;
 	}
 	m[i] = NULL;
 	return (m);
