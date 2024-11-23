@@ -24,23 +24,3 @@ int	ft_lstsize(t_list *lst)
 	}
 	return (count);
 }
-
-/*int main()
-{
-	struct s_list *node1 = ft_lstnew("Hello");
-	struct s_list *node2 = ft_lstnew("Hi");
-	struct s_list *node3 = ft_lstnew("Howdy");
-	struct s_list *node4 = ft_lstnew("Cheers");
-
-	node1->next = node2;
-	node2->next = node3;
-	node3->next = node4;
-	node4->next = NULL;
-
-	printf("the size is : %d", ft_lstsize(node1));
-
-	free(node1);
-	free(node2);
-	free(node3);
-	free(node4);
-}*/

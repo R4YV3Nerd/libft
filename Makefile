@@ -30,4 +30,3 @@ fclean:		clean
 re:			fclean all
 
 .PHONY:		clean
-.SECONDARY:	$(OBJS) $(OBJS_BONUS)
